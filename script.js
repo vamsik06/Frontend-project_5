@@ -18,18 +18,30 @@ function addTask() {
         const taskSpan = document.createElement('span');
         taskSpan.textContent = taskText;
         
+        // Create a mark complete button
+        const completeButton = document.createElement('button');
+        completeButton.textContent = 'Mark Complete';
+        completeButton.className = 'complete-btn';
+        
         // Create a delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.className = 'delete-btn';
         
+        // Add click event to mark as complete
+        completeButton.addEventListener('click', function() {
+            taskSpan.style.textDecoration = 'line-through'; // Cross out the task text
+            completeButton.disabled = true; // Disable the complete button after it's clicked
+        });
+        
         // Add click event to delete button
         deleteButton.addEventListener('click', function() {
-            listItem.remove();
+            listItem.remove(); // Remove the task from the list
         });
         
         // Add the elements to the list item
         listItem.appendChild(taskSpan);
+        listItem.appendChild(completeButton);
         listItem.appendChild(deleteButton);
         
         // Add the list item to the task list
@@ -48,4 +60,4 @@ taskInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         addTask();
     }
-}); 
+});
